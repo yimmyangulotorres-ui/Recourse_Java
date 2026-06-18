@@ -1,13 +1,8 @@
 package edu.unl.cc;
 
-import edu.unl.cc.succession.business.EvenNumberCalculatorUpToLimit;
-import edu.unl.cc.succession.business.PrimeNumberCalculatorUpToLimit;
-import edu.unl.cc.succession.business.PrimeNumberWithPowCalculatorWithTerm;
-import edu.unl.cc.succession.business.PrimeNumberCubeRootCalculatorWithTerm;
-import edu.unl.cc.succession.business.PrimeNumbersCubedSeriesUpToLimit
+import edu.unl.cc.succession.business.*;
 import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
-
 
 import java.util.Scanner;
 
@@ -21,7 +16,6 @@ public class Main {
         System.out.println("2. Serie de primos elevados al cubo  hasta un limite (S = 1^3 + 3^3 + 5^3 + 7^3 + 11^3 + 13^3 ... + N^3): ");
         System.out.println("7. Serie de primos elevados a la raiz de numeros impares hasta un n términos (S = 1^(1/1) + 3^(1/3) + 5^(1/5) + 7^(1/7) + 11^(1/9) + 13^(1/11)): ");
         System.out.println("8. Serie de primos a la raíz cúbica hasta N términos (S = 1^(1/3) + 3^(1/3) + 5^(1/3) + 7^(1/3) + 11^(1/3) + 13^(1/3) ...): ");
-        System.out.println("9.Serie de primos elevados a la raiz cuadrada hasta un limite (S = 1^(1/2) + 3^(1/2) + 5^(1/2) + 7^(1/2) + 11^(1/2) + 13^(1/2)+ .. + N^(1/2):"):
         System.out.println("10. Serie de primos hasta un limite (S = 1 + 2 + 3 + 5 + 7 + 11 + 13 + .. + N: ");
     }
 
@@ -45,12 +39,33 @@ public class Main {
                 serie = new EvenNumberCalculatorUpToLimit(limit);
                 break;
             }
+            case (2):{
+                serie = new PrimeNumbersCubedSeriesUpToLimit(limit);
+                break;
+            }
+
+            case (4): {
+                serie = new PrimeNumbersEvenPowerCalculatorUpToLimit(limit);
+                break;
+            }
+            case (5):{
+                serie = new PrimeNumbersWithOddPowersSeriesWithTerm(limit);
+                break;
+            }
+            case (6): {
+                serie = new PrimeNumbersWithEvenRootSeriesUpToLimit(limit);
+                break;
+            }
             case (7): {
                 serie = new PrimeNumberWithPowCalculatorWithTerm(limit);
                 break;
             }
             case (8): {
                 serie = new PrimeNumberCubeRootCalculatorWithTerm(limit);
+                break;
+            }
+            case (9): {
+                serie = new PrimeNumbersSquareRootSeriesUpToLimit(limit);
                 break;
             }
             case (10): {
