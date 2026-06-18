@@ -4,8 +4,10 @@ import edu.unl.cc.succession.business.EvenNumberCalculatorUpToLimit;
 import edu.unl.cc.succession.business.PrimeNumberCalculatorUpToLimit;
 import edu.unl.cc.succession.business.PrimeNumberWithPowCalculatorWithTerm;
 import edu.unl.cc.succession.business.PrimeNumberCubeRootCalculatorWithTerm;
+import edu.unl.cc.succession.business.PrimeNumbersCubedSeriesUpToLimit
 import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
+
 
 import java.util.Scanner;
 
