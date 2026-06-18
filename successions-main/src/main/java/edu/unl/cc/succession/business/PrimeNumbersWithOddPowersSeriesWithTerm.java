@@ -62,7 +62,8 @@ public class PrimeNumbersWithOddPowersSeriesWithTerm implements Successionable, 
                     .append(exponent)
                     .append(" + ");
             result = result + Math.pow(currentTerm, exponent);
-            //denominatorExponent =  currentTerm;
+
+            currentTerm = nextTerm(currentTerm).intValue();
             exponent += 2;
             countTerm++;
         }
