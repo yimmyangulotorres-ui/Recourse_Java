@@ -54,9 +54,12 @@ public class PrimeNumbersWithEvenRootSeriesUpToLimit implements Successionable, 
 
         final int numeratorExponent =  1;
         int denominatorExponent = 2;
+
         while (countTerm < nTerm) {
 
-            this.printableTerms.append(currentTerm).append("^(")
+            this.printableTerms
+                    .append(currentTerm)
+                    .append("^(")
                     .append(numeratorExponent)
                     .append("/")
                     .append(denominatorExponent)
