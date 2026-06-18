@@ -8,6 +8,10 @@ public class PrimeNumbersCubedSeriesUpToLimit implements Successionable, Printab
     private Integer currentTerm;
     private StringBuilder printableTerms;
 
+    public PrimeNumbersCubedSeriesUpToLimit(Integer limit) {
+        this(1, limit);
+    }
+
     public PrimeNumbersCubedSeriesUpToLimit (Integer start, Integer limit){
         start = validateLimit(start, "Down Limit");
         setLimit(limit);
@@ -31,20 +35,38 @@ public class PrimeNumbersCubedSeriesUpToLimit implements Successionable, Printab
     }
     @Override
     public String print() {
-        return "";
+        return printableTerms.toString();
     }
 
     @Override
     public void setLimit(Number limit) {
-
+        this.limit = validateLimit(limit, "Upper limit");
     }
 
     @Override
     public Number calculate() {
+        double result = 0;
+        int countTerm = 0;
 
+        final double exponent = 3.0;
 
-        return null;
+        while (countTerm < limit) {
+
+            printableTerms.append(currentTerm)
+                    .append("^3")
+                    .append(" + ");
+
+            result += Math.pow(currentTerm, exponent);
+
+            currentTerm = nextTerm(currentTerm).intValue();
+            countTerm++;
+        }
+        if (printableTerms.length() > 4) {
+            printableTerms.setLength(printableTerms.length() - 3);
+        }
+        return result;
     }
+
 
     @Override
     public Number nextTerm(Number current) {
@@ -71,3 +93,4 @@ public class PrimeNumbersCubedSeriesUpToLimit implements Successionable, Printab
         return true;
     }
 }
+
