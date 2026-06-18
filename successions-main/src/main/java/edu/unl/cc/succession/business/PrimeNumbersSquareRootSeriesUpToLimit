@@ -3,6 +3,12 @@ package edu.unl.cc.succession.business;
 import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
 
+/**
+ * Representa la serie de números primos elevados a la raíz cuadrada
+ * S = 1^(1/2) + 3^(1/2) + 5^(1/2) + 7^(1/2) + 11^(1/2) + 13^(1/2) + ... + N^(1/2)
+ *
+ * @author
+ */
 public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Printable {
 
     private Integer limit;
@@ -16,7 +22,13 @@ public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Pr
     public PrimeNumbersSquareRootSeriesUpToLimit(Integer start, Integer limit) {
         start = validateLimit(start, "Down Limit");
         setLimit(limit);
-        this.currentTerm = nextTerm(start - 1).intValue();
+
+        if (start <= 1) {
+            this.currentTerm = 1;
+        } else {
+            this.currentTerm = nextTerm(start - 1).intValue();
+        }
+
         printableTerms = new StringBuilder("S = ");
     }
 
@@ -30,9 +42,9 @@ public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Pr
                 throw new IllegalArgumentException(label + " cannot be negative");
             }
             return value.intValue();
-        } else {
-            throw new IllegalArgumentException(label + " must be an Integer");
         }
+
+        throw new IllegalArgumentException(label + " must be an Integer");
     }
 
     @Override
@@ -48,11 +60,15 @@ public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Pr
         while (currentTerm <= limit) {
 
             printableTerms.append(currentTerm)
-                    .append("^(1/2) + ");
+                          .append("^(1/2) + ");
 
             result += Math.pow(currentTerm, 1.0 / 2.0);
 
-            currentTerm = nextTerm(currentTerm).intValue();
+            if (currentTerm == 1) {
+                currentTerm = 3;
+            } else {
+                currentTerm = nextTerm(currentTerm).intValue();
+            }
         }
 
         return result;
@@ -66,6 +82,7 @@ public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Pr
         boolean isPrime = false;
 
         while (!isPrime) {
+
             isPrime = isPrime(current.intValue());
 
             if (!isPrime) {
