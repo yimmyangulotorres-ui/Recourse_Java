@@ -2,6 +2,11 @@ package edu.unl.cc.succession.business;
 
 import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
+/**
+ * Representa el cálculo de la Serie de primos elevados por pares hasta un limite
+ * (S= 1 ^ 2 + 3 ^ 4 + 5 ^ 6 + 7 ^ 8 + 11 ^ 10 +13^(12)...+N):
+ * @author wduck (Jefferson)
+ */
 
 public class PrimeNumbersEvenPowerCalculatorUpToLimit implements Successionable, Printable {
     private Integer limit;
@@ -48,17 +53,14 @@ public class PrimeNumbersEvenPowerCalculatorUpToLimit implements Successionable,
     public Number calculate() {
 
         double sum = 0;
-
-        while (currentTerm <= limit) {
+        while (currentTerm < limit) {
 
             sum += Math.pow(currentTerm, exponent);
-
-            printableTerms.append(currentTerm)
+            printableTerms
+                    .append(currentTerm)
                     .append("^")
                     .append(exponent);
-
             int nextPrime = nextTerm(currentTerm).intValue();
-
             if (nextPrime <= limit) {
                 printableTerms.append(" + ");
             }
