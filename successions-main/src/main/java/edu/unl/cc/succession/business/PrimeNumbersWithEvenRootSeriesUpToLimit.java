@@ -4,22 +4,22 @@ import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
 
 /**
- * Representa el cálculo de la 5. Serie de primos elevados a impares hasta n térmimos
- * (S=S=7^]+ 3 ^ 3 + 5 ^ 5 + 7 ^ 7 + 17 ^ 9 +13^77..):
+ * Representa el cálculo de la Serie de primos elevados a la raiz de numeros pares hasta un limite
+ * (S = 1^(1/2) + 3^(1/4) + 5^(1/6) +7^(1/8) +11^(1/10) + 13^(1/12) ... + N):
  * @author wduck (Diyer Torres)
  */
 
-public class PrimeNumbersWithOddPowersSeriesWithTerm implements Successionable, Printable {
+public class PrimeNumbersWithEvenRootSeriesUpToLimit implements Successionable, Printable {
 
     private Integer nTerm;  //limit
     private Integer currentTerm;
     private StringBuilder printableTerms;
 
-    public PrimeNumbersWithOddPowersSeriesWithTerm(Integer limit) {
+    public PrimeNumbersWithEvenRootSeriesUpToLimit(Integer limit) {
         this(1, limit);
     }
 
-    public PrimeNumbersWithOddPowersSeriesWithTerm(Integer start, Integer limit) {
+    public PrimeNumbersWithEvenRootSeriesUpToLimit(Integer start, Integer limit) {
         start = validateLimit(start, "Downn limit");
         setLimit(limit);
         this.currentTerm = nextTerm(start-1).intValue();
@@ -52,19 +52,20 @@ public class PrimeNumbersWithOddPowersSeriesWithTerm implements Successionable, 
         double result = 0;
         int countTerm = 0;
 
-        int exponent = 1;
-
+        final int numeratorExponent =  1;
+        int denominatorExponent = 2;
         while (countTerm < nTerm) {
 
-            this.printableTerms
-                    .append(currentTerm)
-                    .append("^")
-                    .append(exponent)
-                    .append(" + ");
-            result = result + Math.pow(currentTerm, exponent);
+            this.printableTerms.append(currentTerm).append("^(")
+                    .append(numeratorExponent)
+                    .append("/")
+                    .append(denominatorExponent)
+                    .append(") +");
+            result = result + Math.pow(currentTerm, ((double)numeratorExponent)/denominatorExponent);
+            currentTerm = nextTerm(currentTerm).intValue();
             //denominatorExponent =  currentTerm;
-            exponent += 2;
-            currentTerm++;
+            denominatorExponent += 2;
+            countTerm++;
         }
         return result;
     }
@@ -104,5 +105,6 @@ public class PrimeNumbersWithOddPowersSeriesWithTerm implements Successionable, 
         return this.printableTerms.toString();
     }
 }
+
 
 
