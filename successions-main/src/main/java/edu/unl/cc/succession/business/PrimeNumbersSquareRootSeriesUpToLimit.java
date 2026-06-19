@@ -9,8 +9,9 @@ import edu.unl.cc.succession.model.Successionable;
  *
  * El límite representa la cantidad de términos que desea generar el usuario.
  *
- * @author
+ * @author wduck (Bayron Coronel)
  */
+
 public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Printable {
 
     private Integer limit;
