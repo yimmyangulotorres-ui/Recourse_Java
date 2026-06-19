@@ -61,6 +61,9 @@ public class PrimeNumberCalculatorUpToLimit implements Successionable, Printable
             result = result + currentTerm;//result += currentTerm;
             currentTerm = this.nextTerm(currentTerm).intValue();
         }
+        if (printableTerms.length() > 4) {
+            printableTerms.setLength(printableTerms.length() - 3);
+        }
         return result;
     }
 
@@ -86,22 +89,6 @@ public class PrimeNumberCalculatorUpToLimit implements Successionable, Printable
         return true;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
