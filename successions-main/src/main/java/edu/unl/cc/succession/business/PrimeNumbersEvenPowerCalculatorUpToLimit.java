@@ -5,7 +5,7 @@ import edu.unl.cc.succession.model.Successionable;
 /**
  * Representa el cálculo de la Serie de primos elevados por pares hasta un limite
  * (S= 1 ^ 2 + 3 ^ 4 + 5 ^ 6 + 7 ^ 8 + 11 ^ 10 +13^(12)...+N):
- * @author wduck (Jefferson)
+ * @author wduck (Jefferson Sarango)
  */
 
 public class PrimeNumbersEvenPowerCalculatorUpToLimit implements Successionable, Printable {
