@@ -17,6 +17,7 @@ public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Pr
     private Integer currentTerm;
     private StringBuilder printableTerms;
 
+
     public PrimeNumbersSquareRootSeriesUpToLimit(Integer limit) {
         setLimit(limit);
         this.currentTerm = 1;
@@ -52,7 +53,7 @@ public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Pr
         double result = 0;
         int countTerm = 0;
 
-        while (countTerm < limit) {
+        while (currentTerm <= limit) {
 
             printableTerms.append(currentTerm)
                     .append("^(1/2)");
@@ -71,7 +72,9 @@ public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Pr
                 currentTerm = nextTerm(currentTerm).intValue();
             }
         }
-
+        if (printableTerms.length() > 4) {
+            printableTerms.setLength(printableTerms.length() - 3);
+        }
         return result;
     }
 
