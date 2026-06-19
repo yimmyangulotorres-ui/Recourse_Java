@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package edu.unl.cc;
 
 import edu.unl.cc.succession.business.EvenNumberCalculatorUpToLimit;
@@ -45,6 +40,10 @@ public class Main {
         printMenu();
         System.out.print("║Elija la opción de la serie que desea calcular: ");
         int option = scanner.nextInt();
+        String nombre = GetNameOption(option);
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║Opción Seleccionada: " + nombre);
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
         if (option > 0 && option <= 10) {
             return option;
         } else {
@@ -55,8 +54,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int option = readOption(scanner);
-        System.out.print("Debe ingresar un limite/N términos: ");
+        System.out.print("║Debe ingresar un limite/N términos: ");
         int limit = scanner.nextInt();
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
         scanner.nextLine();
         Successionable serie = null;
         switch (option) {
@@ -75,15 +76,28 @@ public class Main {
 
         if (serie != null) {
             Number result = serie.calculate();
-            System.out.println(((Printable)serie).print());
-            System.out.println("S = " + String.valueOf(result) + "\n");
+            System.out.println("║" + ((Printable)serie).print());
+            System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+            System.out.println("║Resultado Obtenido de la Serie Seleccionada");
+            System.out.println("║S = " + String.valueOf(result));
+            System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         }
 
     }
     private static String GetNameOption(int option){
         return switch (option){
-            case 1 -> ("rrt");
-            default -> ("");
-        }
+            case 1 -> ("Serie de numeros pares hasta un limite");
+            case 2 -> ("Serie de primos elevados al cubo  hasta un limite");
+            case 3 -> ("Serie de primos elevados al cubo  hasta N términos");
+            case 4 -> ("Serie de primos elevados por pares hasta un limite");
+            case 5 -> ("Serie de primos elevados a impares hasta n térmimos");
+            case 6 -> ("Serie de primos elevados a la raiz de numeros pares hasta un limite");
+            case 7 -> ("Serie de primos elevados a la raiz de numeros impares hasta un n términos");
+            case 8 -> ("Serie de primos elevados a la raiz cúbica hasta un n términos");
+            case 9 -> ("Serie de primos elevados a la raiz cuadrada hasta un limite");
+            case 10 -> ("Serie de primos hasta un limite");
+            default -> ("Opción no Valida");
+        };
     }
 }
+
