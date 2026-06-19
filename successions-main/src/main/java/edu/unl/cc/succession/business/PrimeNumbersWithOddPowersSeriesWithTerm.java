@@ -4,7 +4,7 @@ import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
 
 /**
- * Representa el cálculo de la 5. Serie de primos elevados a impares hasta n térmimos
+ * 5. Representa el cálculo de la 5. Serie de primos elevados a impares hasta n térmimos
  *(S = 1^1 + 3^3 + 5^5 + 7^7 + 11^9 + 13^11 ..)::
  * @author wduck (Diyer Torres)
  */
