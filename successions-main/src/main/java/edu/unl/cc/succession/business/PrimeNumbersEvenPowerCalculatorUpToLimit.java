@@ -3,7 +3,7 @@ package edu.unl.cc.succession.business;
 import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
 /**
- * 9. Representa el cálculo de la Serie de primos elevados por pares hasta un limite
+ * 4. Representa el cálculo de la Serie de primos elevados por pares hasta un limite
  * (S= 1 ^ 2 + 3 ^ 4 + 5 ^ 6 + 7 ^ 8 + 11 ^ 10 +13^(12)...+N):
  * @author wduck (Jefferson Sarango)
  */
