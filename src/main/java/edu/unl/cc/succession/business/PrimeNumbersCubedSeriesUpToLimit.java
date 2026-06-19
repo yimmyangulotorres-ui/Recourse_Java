@@ -50,7 +50,7 @@ public class PrimeNumbersCubedSeriesUpToLimit implements Successionable, Printab
 
         final double exponent = 3.0;
 
-        while (countTerm < limit) {
+        while (currentTerm <= limit) {
 
             printableTerms.append(currentTerm)
                     .append("^3")
@@ -58,7 +58,12 @@ public class PrimeNumbersCubedSeriesUpToLimit implements Successionable, Printab
 
             result += Math.pow(currentTerm, exponent);
 
-            currentTerm = nextTerm(currentTerm).intValue();
+            if (currentTerm == 1) {
+                currentTerm = 3;
+            } else {
+                currentTerm = nextTerm(currentTerm).intValue();
+            }
+
             countTerm++;
         }
         if (printableTerms.length() > 4) {

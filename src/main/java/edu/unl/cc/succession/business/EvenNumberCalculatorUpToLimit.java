@@ -14,6 +14,12 @@ public class EvenNumberCalculatorUpToLimit implements Successionable, Printable 
     private Integer currentTerm;
     private StringBuilder printableTerms;
 
+    public EvenNumberCalculatorUpToLimit(Integer limit) {
+        setLimit(limit);
+        currentTerm = 0;
+        printableTerms = new StringBuilder("S = ");
+    }
+
 public EvenNumberCalculatorUpToLimit (Integer start, Integer limit){
     start = validateLimit(start, "Down Limit");
     setLimit(limit);
@@ -35,12 +41,6 @@ private Integer validateLimit(Number value, String label){
     }
 }
 
-    public EvenNumberCalculatorUpToLimit(Integer limit) {
-        setLimit(limit);
-        currentTerm = 0;
-        printableTerms = new StringBuilder("S = ");
-    }
-
     @Override
     public void setLimit(Number limit) {
         if  (limit == null) {
@@ -60,10 +60,13 @@ private Integer validateLimit(Number value, String label){
     public Number calculate() {
         long result = 0;
         this.currentTerm = this.nextTerm(this.currentTerm).intValue();
-        while (this.currentTerm <= this.limit) {
-            this.printableTerms.append(this.currentTerm).append("  + ");
-            result = result + this.currentTerm;
+        while (currentTerm <= limit) {
+            this.printableTerms.append(this.currentTerm).append(" + ");
+            result += this.currentTerm;
             this.currentTerm = this.nextTerm(this.currentTerm).intValue();
+        }
+        if (printableTerms.length() > 4) {
+            printableTerms.setLength(printableTerms.length() - 3);
         }
         return result;
     }
