@@ -1,46 +1,45 @@
-package edu.unl.cc.succession.business;
 
+package edu.unl.cc.succession.business;
 import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
 
-/**
- * Representa el cálculo de la Serie números Primos elevado a la potencia inversa del número primo hasta N términos
- * (S = 1^(1/1) + 3^(1/3) + 5^(1/5) + 7^(1/7) + 11^(1/9) + 13^(1/11)):
- * @author wduck (Wilman Chamba Z.)
- */
+public class PrimeNumberCubeRootCalculatorWithTerm implements Successionable, Printable {
 
-public class PrimeNumberWithPowCalculatorWithTerm implements Successionable, Printable {
+    /**
+     8. Serie de primos elevados a la raiz cúbica hasta un n términos (S = 1^(1/3) + 3^(1/3) + 5^(1/3) + 7^(1/3) + 11^(1/3) + 13^(1/3)):
 
-    private Integer nTerm;  //limit
+     **/
+    private Integer nTerm;
     private Integer currentTerm;
     private StringBuilder printableTerms;
 
-    public PrimeNumberWithPowCalculatorWithTerm(Integer limit) {
+    public PrimeNumberCubeRootCalculatorWithTerm(Integer limit) {
         this(1, limit);
     }
 
-    public PrimeNumberWithPowCalculatorWithTerm(Integer start, Integer limit) {
-        start = validateLimit(start, "Downn limit");
+    public PrimeNumberCubeRootCalculatorWithTerm(Integer start, Integer limit) {
         setLimit(limit);
-        this.currentTerm = nextTerm(start-1).intValue();
+        this.currentTerm = start;
+
+        if (this.currentTerm < 1) {
+            this.currentTerm = 1;
+        }
+
         printableTerms = new StringBuilder("S = ");
     }
 
-
     private Integer validateLimit(Number value, String label) {
-        if  (value == null) {
+        if (value == null) {
             throw new IllegalArgumentException(label + " cannot be null");
         }
-        if  (value instanceof Integer) {
-            if (value.intValue() < 0) {
-                throw new IllegalArgumentException(label + " cannot be negative");
+        if (value instanceof Integer) {
+            if (value.intValue() <= 0) {
+                throw new IllegalArgumentException(label + " must be positive");
             }
             return value.intValue();
-        } else {
-            throw new IllegalArgumentException(label + " must be an integer");
         }
+        throw new IllegalArgumentException(label + " must be an integer");
     }
-
 
     @Override
     public void setLimit(Number limit) {
@@ -51,56 +50,48 @@ public class PrimeNumberWithPowCalculatorWithTerm implements Successionable, Pri
     public Number calculate() {
         double result = 0;
         int countTerm = 0;
-        final int numeratorExponent =  1;
-        //int denominatorExponent = currentTerm;
-        int denominatorExponent = 1;
+
+        final double exponent = 1.0 / 3.0;
+
         while (countTerm < nTerm) {
 
-            this.printableTerms.append(currentTerm).append("^(")
-                    .append(numeratorExponent).append("/").append(denominatorExponent)
-                    .append(") +");
-            result = result + Math.pow(currentTerm, ((double)numeratorExponent)/denominatorExponent);
+            printableTerms.append(currentTerm)
+                    .append("^(1/3)")
+                    .append(" + ");
+
+            result += Math.pow(currentTerm, exponent);
+
             currentTerm = nextTerm(currentTerm).intValue();
-            //denominatorExponent =  currentTerm;
-            denominatorExponent += 2;
             countTerm++;
+        }
+        if (printableTerms.length() > 4) {
+            printableTerms.setLength(printableTerms.length() - 3);
         }
         return result;
     }
 
-    /**
-     * Representar el término solo de la base de la serir
-     * @param current
-     * @return
-     */
     @Override
     public Number nextTerm(Number current) {
-        current = current.intValue() + 1;
-        boolean isPrime = false;
-        while (!isPrime){
-            isPrime = isPrime(current.intValue());
-            if (!isPrime){
-                current = current.intValue() + 1;
-            }
+        int value = current.intValue() + 1;
+
+        while (!isPrime(value)) {
+            value++;
         }
-        return current;
+
+        return value;
     }
 
-    private boolean isPrime(Integer number) {
-        if (number < 1) {
-            return false;
-        }
-        for (int i = 2; i < number; i++) {
-            if (number % i == 0) {
-                return false;
-            }
+    private boolean isPrime(int number) {
+        if (number <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) return false;
         }
         return true;
     }
 
     @Override
     public String print() {
-        return this.printableTerms.toString();
+        return printableTerms.toString();
     }
 }
 
