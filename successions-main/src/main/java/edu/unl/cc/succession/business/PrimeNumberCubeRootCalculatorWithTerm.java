@@ -4,10 +4,12 @@ import edu.unl.cc.succession.model.Successionable;
 
 public class PrimeNumberCubeRootCalculatorWithTerm implements Successionable, Printable {
 
-    /**
-     8. Serie de primos elevados a la raiz cúbica hasta un n términos (S = 1^(1/3) + 3^(1/3) + 5^(1/3) + 7^(1/3) + 11^(1/3) + 13^(1/3)):
-
-     **/
+/**
+ 8. Serie de primos elevados a la raiz cúbica hasta un n términos 
+ * (S = 1^(1/3) + 3^(1/3) + 5^(1/3) + 7^(1/3) + 11^(1/3) + 13^(1/3)):
+ * @author wduck (Irvin Armijos)
+ */
+    
     private Integer nTerm;
     private Integer currentTerm;
     private StringBuilder printableTerms;
