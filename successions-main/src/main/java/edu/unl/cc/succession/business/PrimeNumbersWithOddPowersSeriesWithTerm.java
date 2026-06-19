@@ -67,6 +67,9 @@ public class PrimeNumbersWithOddPowersSeriesWithTerm implements Successionable, 
             exponent += 2;
             countTerm++;
         }
+        if (printableTerms.length() > 4) {
+            printableTerms.setLength(printableTerms.length() - 3);
+        }
         return result;
     }
 
@@ -105,5 +108,6 @@ public class PrimeNumbersWithOddPowersSeriesWithTerm implements Successionable, 
         return this.printableTerms.toString();
     }
 }
+
 
 
