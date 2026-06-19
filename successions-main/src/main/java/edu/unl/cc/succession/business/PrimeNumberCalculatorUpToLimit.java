@@ -4,7 +4,7 @@ import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
 
 /**
- * Representa el cálculo de la Serie números Primos hasta Limite N
+ * 10. Representa el cálculo de la Serie números Primos hasta Limite N
  * S = 1 + 2 + 3 + 5 + 7 + 11 + ... + N
  * @author wduck (Bayron Coronel.)
  */
