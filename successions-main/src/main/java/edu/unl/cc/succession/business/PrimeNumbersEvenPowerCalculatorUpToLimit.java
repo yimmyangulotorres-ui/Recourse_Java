@@ -14,6 +14,10 @@ public class PrimeNumbersEvenPowerCalculatorUpToLimit implements Successionable,
     private Integer exponent;
     private StringBuilder printableTerms;
 
+    public PrimeNumbersEvenPowerCalculatorUpToLimit(Integer limit) {
+        this(1, limit);
+    }
+
     public PrimeNumbersEvenPowerCalculatorUpToLimit(Integer start, Integer limit) {
         start = validateLimit(start, "Down Limit");
         setLimit(limit);
@@ -53,7 +57,7 @@ public class PrimeNumbersEvenPowerCalculatorUpToLimit implements Successionable,
     public Number calculate() {
 
         double sum = 0;
-        while (currentTerm < limit) {
+        while (currentTerm <= limit) {
 
             sum += Math.pow(currentTerm, exponent);
             printableTerms
