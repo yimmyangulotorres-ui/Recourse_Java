@@ -54,12 +54,9 @@ public class PrimeNumbersWithEvenRootSeriesUpToLimit implements Successionable, 
 
         final int numeratorExponent =  1;
         int denominatorExponent = 2;
+        while (currentTerm <= nTerm){
 
-        while (countTerm < nTerm) {
-
-            this.printableTerms
-                    .append(currentTerm)
-                    .append("^(")
+            this.printableTerms.append(currentTerm).append("^(")
                     .append(numeratorExponent)
                     .append("/")
                     .append(denominatorExponent)
@@ -69,6 +66,9 @@ public class PrimeNumbersWithEvenRootSeriesUpToLimit implements Successionable, 
             //denominatorExponent =  currentTerm;
             denominatorExponent += 2;
             countTerm++;
+        }
+        if (printableTerms.length() > 4) {
+            printableTerms.setLength(printableTerms.length() - 2);
         }
         return result;
     }
@@ -108,6 +108,4 @@ public class PrimeNumbersWithEvenRootSeriesUpToLimit implements Successionable, 
         return this.printableTerms.toString();
     }
 }
-
-
 
