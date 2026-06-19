@@ -4,7 +4,7 @@ import edu.unl.cc.succession.model.Printable;
 import edu.unl.cc.succession.model.Successionable;
 
 /**
- * Representa la serie de números primos elevados a la raíz cuadrada.
+ * 9. Representa la serie de números primos elevados a la raíz cuadrada.
  * S = 1^(1/2) + 3^(1/2) + 5^(1/2) + 7^(1/2) + 11^(1/2) + 13^(1/2) + ...
  *
  * El límite representa la cantidad de términos que desea generar el usuario.
