@@ -107,4 +107,3 @@ public class PrimeNumberWithPowCalculatorWithTerm implements Successionable, Pri
     }
 }
 
-
