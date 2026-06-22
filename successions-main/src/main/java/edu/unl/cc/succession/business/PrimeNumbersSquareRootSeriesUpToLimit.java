@@ -67,11 +67,7 @@ public class PrimeNumbersSquareRootSeriesUpToLimit implements Successionable, Pr
                 printableTerms.append(" + ");
             }
 
-            if (currentTerm == 1) {
-                currentTerm = 3;
-            } else {
-                currentTerm = nextTerm(currentTerm).intValue();
-            }
+            currentTerm = nextTerm(currentTerm).intValue();
         }
         if (printableTerms.length() > 4) {
             printableTerms.setLength(printableTerms.length() - 3);
