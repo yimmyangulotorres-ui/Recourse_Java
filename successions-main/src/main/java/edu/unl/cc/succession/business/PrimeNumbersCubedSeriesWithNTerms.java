@@ -84,7 +84,7 @@ public class PrimeNumbersCubedSeriesWithNTerms implements Successionable, Printa
 
     private boolean isPrime(Integer number) {
 
-        if (number <= 1) {
+        if (number < 1) {
             return false;
         }
 
