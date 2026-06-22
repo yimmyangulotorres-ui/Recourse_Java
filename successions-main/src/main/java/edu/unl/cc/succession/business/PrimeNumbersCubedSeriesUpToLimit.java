@@ -62,11 +62,8 @@ public class PrimeNumbersCubedSeriesUpToLimit implements Successionable, Printab
 
             result += Math.pow(currentTerm, exponent);
 
-            if (currentTerm == 1) {
-                currentTerm = 3;
-            } else {
                 currentTerm = nextTerm(currentTerm).intValue();
-            }
+
 
             countTerm++;
         }
@@ -102,5 +99,4 @@ public class PrimeNumbersCubedSeriesUpToLimit implements Successionable, Printab
         return true;
     }
 }
-
 
