@@ -95,7 +95,7 @@ public class PrimeNumbersEvenPowerCalculatorUpToLimit implements Successionable,
 
     private boolean isPrime(Integer number) {
 
-        if (number < 2) {
+        if (number < 1) {
             return false;
         }
 
