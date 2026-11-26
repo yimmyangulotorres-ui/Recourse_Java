@@ -6,15 +6,18 @@
 > Sistema de autocompletado con caché SIEVE para el Festival Internacional de Artes Vivas de Loja (FIAVL)
 > Carrera de Computación · Universidad Nacional de Loja · 12 de noviembre de 2026
 
-**Contenido**
-[Resumen](#resumen) ·
-[1 · Introducción](#1-introducción-y-contexto-del-proyecto) ·
-[2 · Arquitectura](#2-arquitectura-y-estructuras-de-datos) ·
-[3 · Políticas de caché](#3-políticas-de-reemplazo-de-caché-sieve-vs-fifo-y-lru) ·
-[4 · Directorios](#4-estructura-del-proyecto-y-directorios) ·
-[5 · Flujo](#5-controlador-central-y-flujo-de-ejecución) ·
-[6 · Conclusiones](#6-conclusiones) ·
-[Anexos](#anexos)
+## Índice
+
+| Sección | Descripción | Acceso |
+|:---|:---|:---:|
+| 📜 **Resumen** | Visión general del sistema y conceptos clave. | <a href="#resumen"><img src="assets/svg/btn-resumen.svg" alt="Ver resumen"/></a> |
+| 🎭 **1 · Introducción** | Contexto del FIAVL y objetivos del sistema. | <a href="#1-introducción-y-contexto-del-proyecto"><img src="assets/svg/btn-intro.svg" alt="Ver introducción"/></a> |
+| 🌳 **2 · Arquitectura** | Trie, Map y lista doblemente enlazada, con modelo 3D. | <a href="#2-arquitectura-y-estructuras-de-datos"><img src="assets/svg/btn-arq.svg" alt="Ver arquitectura"/></a> |
+| ♻️ **3 · Políticas de caché** | SIEVE vs. FIFO y LRU, animación e indicadores de evaluación. | <a href="#3-políticas-de-reemplazo-de-caché-sieve-vs-fifo-y-lru"><img src="assets/svg/btn-cache.svg" alt="Ver políticas"/></a> |
+| 📁 **4 · Directorios** | Estructura del proyecto en Node.js y Frontend. | <a href="#4-estructura-del-proyecto-y-directorios"><img src="assets/svg/btn-dir.svg" alt="Ver directorios"/></a> |
+| 🔁 **5 · Flujo de ejecución** | Recorrido de una consulta, interfaz y complejidades. | <a href="#5-controlador-central-y-flujo-de-ejecución"><img src="assets/svg/btn-flujo.svg" alt="Ver flujo"/></a> |
+| 🏁 **6 · Conclusiones** | Aportes y cierre del proyecto. | <a href="#6-conclusiones"><img src="assets/svg/btn-concl.svg" alt="Ver conclusiones"/></a> |
+| 🖼️ **Anexos** | Evidencias, fotos de Loja, ejecución, estado y equipo. | <a href="#anexos"><img src="assets/svg/btn-anexos.svg" alt="Ver anexos"/></a> |
 
 <br/>
 
@@ -32,7 +35,20 @@ El núcleo del sistema integra tres piezas:
 | 🗝️ **Índice dinámico (Map)** | Acceso directo a la caché en `O(1)`. |
 | ♻️ **Caché SIEVE** | Reemplazo eficiente, contrastado con las políticas clásicas **FIFO** y **LRU**. |
 
-<br/>
+### ✨ ¿Qué es el autocompletado?
+
+Es una función que **sugiere resultados mientras el usuario escribe**, a partir de las primeras letras (el *prefijo*). Por ejemplo, al escribir `pa` el sistema propone lugares del catálogo cuyo nombre empieza así, sin esperar a que se complete la palabra.
+
+### 🧠 ¿Qué es una caché y qué es una política de reemplazo?
+
+La **caché** guarda resultados recientes para no repetir trabajo, pero su espacio es limitado. Cuando se llena, una **política de reemplazo** decide qué elemento sale.
+
+| Caché | Política de reemplazo |
+|---|---|
+| Es la memoria temporal donde se guardan los resultados ya calculados. | Es la regla que decide qué elemento se expulsa cuando la caché está llena. |
+| Ejemplo: las sugerencias obtenidas para el prefijo `pa`. | Ejemplo: **SIEVE**, **LRU** o **FIFO**. |
+
+<p align="right"><a href="#índice"><img src="assets/svg/btn-top.svg" alt="Volver al índice"/></a></p>
 
 <img src="assets/svg/sec-01.svg" width="100%" alt="Acto I"/>
 
@@ -42,7 +58,16 @@ El FIAVL genera una alta concurrencia de consultas digitales sobre **obras, sede
 
 El sistema prioriza respuestas en milisegundos y evita accesos redundantes a la base de datos o recorridos complejos sobre estructuras pesadas cuando las consultas se repiten.
 
-<br/>
+### 🎯 Objetivos del sistema
+
+- 🎭 Facilitar el descubrimiento de lugares y eventos turísticos y culturales.
+- 🌳 Implementar búsqueda por prefijos mediante un árbol Trie.
+- ⚡ Optimizar la recuperación de consultas repetidas mediante caché.
+- 🔗 Aplicar listas doblemente enlazadas en la administración de memoria.
+- ⚖️ Comparar diferentes políticas de reemplazo.
+- 📈 Analizar el comportamiento y el rendimiento de las estructuras implementadas.
+
+<p align="right"><a href="#índice"><img src="assets/svg/btn-top.svg" alt="Volver al índice"/></a></p>
 
 <img src="assets/svg/sec-02.svg" width="100%" alt="Acto II"/>
 
@@ -68,7 +93,7 @@ El sistema descansa sobre tres componentes estructurales ubicados en el servidor
 
 </div>
 
-<br/>
+<p align="right"><a href="#índice"><img src="assets/svg/btn-top.svg" alt="Volver al índice"/></a></p>
 
 <img src="assets/svg/sec-03.svg" width="100%" alt="Acto III"/>
 
@@ -138,7 +163,20 @@ class CacheSieve {
 
 </details>
 
-<br/>
+### 3.2. Indicadores de evaluación
+
+Para comparar las tres políticas bajo una misma secuencia de consultas se miden los siguientes indicadores:
+
+| Indicador | Descripción |
+|---|---|
+| ⏱️ **Tiempo de ejecución** | Tiempo requerido para procesar la consulta. |
+| 🟢 **Aciertos de caché** | Resultados recuperados sin repetir la búsqueda. |
+| 🔴 **Fallos de caché** | Consultas que requieren procesamiento. |
+| 📦 **Capacidad** | Límite de almacenamiento configurado. |
+| ♻️ **Expulsiones** | Elementos eliminados de la caché. |
+| 📈 **Rendimiento** | Comparación del comportamiento entre políticas. |
+
+<p align="right"><a href="#índice"><img src="assets/svg/btn-top.svg" alt="Volver al índice"/></a></p>
 
 <img src="assets/svg/sec-04.svg" width="100%" alt="Acto IV"/>
 
@@ -170,7 +208,7 @@ autocompletado-artes-vivas-sieve/
 
 <sub>Figura 3. Estructura de directorios y componentes del proyecto.</sub>
 
-<br/>
+<p align="right"><a href="#índice"><img src="assets/svg/btn-top.svg" alt="Volver al índice"/></a></p>
 
 <img src="assets/svg/sec-05.svg" width="100%" alt="Acto V"/>
 
@@ -187,7 +225,42 @@ El controlador central orquesta la interacción entre el usuario y las estructur
 3. **Acierto (hit):** devuelve las sugerencias culturales al instante.
 4. **Fallo (miss):** delega la búsqueda al Trie en `O(L)`, guarda el resultado en la caché con la política activa (**SIEVE**, **LRU** o **FIFO**) y responde al cliente con métricas de rendimiento en milisegundos.
 
-<br/>
+<details>
+<summary><b>🧮 Ejemplo: ¿qué pasa al escribir "pu"?</b></summary>
+
+1. La interfaz envía el prefijo `pu`.
+2. El servidor consulta el `Map` de la caché: si hay *acierto*, responde sin tocar el Trie.
+3. Si hay *fallo*, el Trie recorre `p → u` (2 pasos) y reúne las palabras bajo ese nodo.
+4. El resultado se guarda en caché; si está llena, la política activa (FIFO, LRU o SIEVE) expulsa un elemento.
+
+</details>
+
+### 5.1. Interfaz de exploración
+
+La interfaz permite ingresar nombres o fragmentos de palabras para localizar información cultural y turística de Loja. A medida que se introduce texto, el sistema procesa la consulta y presenta las coincidencias disponibles.
+
+| Funcionalidad | Descripción |
+|---|---|
+| 🔎 **Autocompletado** | Generación dinámica de sugerencias. |
+| 🔤 **Búsqueda por prefijo** | Localización a partir de caracteres iniciales. |
+| ⚡ **Respuesta dinámica** | Actualización de resultados durante la escritura. |
+| 🗂️ **Consulta de catálogo** | Exploración de lugares, obras y eventos. |
+| 🩺 **Estado del sistema** | Información sobre el estado de procesamiento. |
+
+### 5.2. Análisis de operaciones
+
+| Operación | Estructura | Complejidad esperada |
+|---|---|:--:|
+| Recorrido de prefijo | Trie | `O(L)` |
+| Acceso a clave | Map | `O(1)` prom. |
+| Búsqueda en caché | Map | `O(1)` prom. |
+| Inserción local | Lista doble | `O(1)` con referencia |
+| Eliminación local | Lista doble | `O(1)` con referencia |
+| Recuperación de coincidencias | Trie | Depende del nº de resultados |
+
+<sub>`L` = longitud del prefijo ingresado. La recuperación completa también depende del número de coincidencias.</sub>
+
+<p align="right"><a href="#índice"><img src="assets/svg/btn-top.svg" alt="Volver al índice"/></a></p>
 
 <img src="assets/svg/sec-06.svg" width="100%" alt="Acto VI"/>
 
@@ -197,13 +270,15 @@ La implementación conjunta del **Árbol de prefijos** para la búsqueda de text
 
 La evicción basada en el bit de visita y el puntero `hand` minimiza la latencia en el entorno de ejecución de Node.js y evita los cuellos de botella de reordenamiento típicos de políticas tradicionales como LRU.
 
-<br/>
+<p align="right"><a href="#índice"><img src="assets/svg/btn-top.svg" alt="Volver al índice"/></a></p>
 
 <img src="assets/svg/sec-anexo.svg" width="100%" alt="Epílogo"/>
 
 ## Anexos
 
 ### A. Evidencias del sistema
+
+> **Capturas:** las imágenes de esta tabla son marcadores. Reemplaza cada archivo de `assets/capturas/` con tu captura real, usando el mismo nombre.
 
 | Buscador | Resultados |
 |:--:|:--:|
@@ -232,7 +307,24 @@ npm install
 npm start      # ajusta al script definido en tu package.json
 ```
 
-### D. Equipo y datos académicos
+### D. Estado de los componentes
+
+| Componente | Estado |
+|---|:---:|
+| Árbol Trie | 🟢 |
+| Autocompletado turístico | 🟢 |
+| Servidor local | 🟢 |
+| Gestión mediante Map | 🟢 |
+| Lista doblemente enlazada | 🟢 |
+| Política FIFO | 🟢 |
+| Política LRU | 🟢 |
+| Política SIEVE | 🟢 |
+| Métricas de consulta | 🟢 |
+| Mejoras y pruebas experimentales | 🟡 |
+
+<sub>🟢 Implementado · 🟡 En revisión o mejora · ⚪ Pendiente</sub>
+
+### E. Equipo y datos académicos
 
 | | |
 |---|---|
@@ -243,6 +335,6 @@ npm start      # ajusta al script definido en tu package.json
 | **Período** | Septiembre 2026 – Febrero 2027 |
 | **Integrantes** | Yimmy Onner Angulo Torres · Richard Santiago Guaman Sanchez · Freddy Alexander Ordoñez Gonzalez · Joaquin Emilio Moscol Castillo · Erick Jahirs Rogel Baque |
 
-<br/>
+<p align="right"><a href="#índice"><img src="assets/svg/btn-top.svg" alt="Volver al índice"/></a></p>
 
 <img src="assets/svg/footer.svg" width="100%" alt="Hecho con cariño en Loja, Ecuador"/>
